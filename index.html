@@ -1,502 +1,725 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <title>Ihre Garage – Service & Werkstatt</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta
-    name="description"
-    content="Moderne Garage & Werkstatt für Service, Reparaturen, Reifen und mehr. Faire Preise, ehrliche Beratung."
-  />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I&A Automobile GmbH</title>
+<style>
+  :root{
+    --blue:#0f4fd8;
+    --blue-dark:#0a1f52;
+    --blue-soft:#eef4ff;
+    --text:#152238;
+    --muted:#5f6f87;
+    --line:#dbe7ff;
+    --white:#ffffff;
+    --shadow:0 18px 45px rgba(14, 48, 118, .12);
+    --radius:22px;
+    --max:1180px;
+  }
 
-  <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#fff;
+    color:var(--text);
+    line-height:1.6;
+
+  }
+
+  a{text-decoration:none;color:inherit}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
+
+  .nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(10,31,82,.08);
+  }
+  .nav-inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:18px;
+    padding:16px 0;
+  }
+  .brand{
+    font-size:22px;
+    font-weight:800;
+    color:var(--blue-dark);
+    letter-spacing:.2px;
+  }
+  .menu{
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+    color:var(--muted);
+    font-size:14px;
+  }
+
+  .hero{
+    position:relative;
+    overflow:hidden;
+    color:#fff;
+    background:
+      linear-gradient(110deg, rgba(8,25,65,.90) 0%, rgba(15,79,216,.78) 55%, rgba(15,79,216,.55) 100%),
+      url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+  }
+  .hero:after{
+    content:"";
+    position:absolute;
+    inset:auto -100px -120px auto;
+    width:320px;height:320px;
+    border-radius:50%;
+    background:rgba(255,255,255,.08);
+    filter:blur(10px);
+  }
+  .hero-grid{
+    position:relative;
+    z-index:1;
+    display:grid;
+    grid-template-columns:1.15fr .85fr;
+    gap:28px;
+    align-items:center;
+    min-height:680px;
+    padding:70px 0;
+  }
+  .badge{
+    display:inline-block;
+    padding:10px 14px;
+    border-radius:999px;
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.18);
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:1.1px;
+    text-transform:uppercase;
+    margin-bottom:18px;
+  }
+  h1{
+    margin:0 0 16px;
+    font-size:58px;
+    line-height:1.02;
+    letter-spacing:-1.1px;
+  }
+  .lead{
+    max-width:700px;
+    margin:0;
+    font-size:19px;
+    color:rgba(255,255,255,.92);
+  }
+  .hero-actions{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-top:28px;
+  }
+  .btn{
+    display:inline-block;
+    padding:14px 20px;
+    border-radius:14px;
+    font-weight:700;
+    transition:.2s ease;
+    box-shadow:0 8px 22px rgba(0,0,0,.08);
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{
+    background:#fff;
+    color:var(--blue-dark);
+  }
+  .btn-secondary{
+    background:rgba(255,255,255,.10);
+    color:#fff;
+    border:1px solid rgba(255,255,255,.22);
+  }
+
+  .hero-card{
+    background:rgba(255,255,255,.14);
+    border:1px solid rgba(255,255,255,.20);
+    backdrop-filter:blur(14px);
+    border-radius:26px;
+    padding:24px;
+    box-shadow:0 20px 50px rgba(0,0,0,.18);
+  }
+  .hero-card img{
+    width:100%;
+    height:230px;
+    object-fit:cover;
+    border-radius:18px;
+    margin-bottom:18px;
+  }
+  .hero-card h3{
+    margin:0 0 8px;
+    font-size:26px;
+  }
+  .hero-card p{
+    margin:0 0 10px;
+    color:rgba(255,255,255,.92);
+  }
+
+  .quick-features{
+    margin-top:-52px;
+    position:relative;
+    z-index:3;
+  }
+  .quick-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+  }
+  .quick-item{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:20px;
+    box-shadow:var(--shadow);
+  }
+  .quick-item .icon{
+    width:46px;height:46px;
+    display:grid;place-items:center;
+    border-radius:14px;
+    background:var(--blue-soft);
+    color:var(--blue);
+    font-size:22px;
+    margin-bottom:14px;
+  }
+  .quick-item strong{
+    display:block;
+    margin-bottom:6px;
+    font-size:17px;
+    color:var(--blue-dark);
+  }
+  .quick-item span{color:var(--muted);font-size:14px}
+
+  section{padding:84px 0}
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    align-items:end;
+    margin-bottom:28px;
+  }
+  .eyebrow{
+    color:var(--blue);
+    text-transform:uppercase;
+    letter-spacing:1px;
+    font-size:12px;
+    font-weight:700;
+    margin-bottom:8px;
+  }
+  .section-head h2{
+    margin:0 0 8px;
+    font-size:40px;
+    line-height:1.05;
+    color:var(--blue-dark);
+  }
+  .section-head p{
+    margin:0;
+    color:var(--muted);
+    max-width:700px;
+  }
+
+  .partner{
+    display:grid;
+    grid-template-columns:1fr 1.05fr;
+    gap:24px;
+    align-items:stretch;
+  }
+  .partner-image img{
+    height:100%;
+    min-height:300px;
+    object-fit:cover;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+  }
+  .partner-card{
+    background:linear-gradient(180deg,#f7faff,#edf4ff);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:32px;
+    box-shadow:var(--shadow);
+  }
+  .partner-card h3{
+    margin:0 0 10px;
+    font-size:30px;
+    color:var(--blue-dark);
+  }
+  .partner-card p{margin:0 0 18px;color:var(--muted)}
+
+  .services-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:22px;
+  }
+  .service-card{
+    overflow:hidden;
+    border:1px solid var(--line);
+    border-radius:24px;
+    background:#fff;
+    box-shadow:var(--shadow);
+  }
+  .service-image{
+    height:250px;
+    overflow:hidden;
+  }
+  .service-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+  .service-body{
+    padding:24px;
+  }
+  .service-body h3{
+    margin:0 0 10px;
+    font-size:28px;
+    color:var(--blue-dark);
+  }
+  .service-body p{
+    margin:0 0 14px;
+    color:var(--muted);
+  }
+  .service-list{
+    margin:0 0 18px;
+    padding-left:18px;
+    color:var(--text);
+  }
+  .service-list li{margin-bottom:6px}
+  .service-actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .btn-blue{
+    background:var(--blue);
+    color:#fff;
+  }
+  .btn-light{
+    background:var(--blue-soft);
+    color:var(--blue-dark);
+    border:1px solid #cfe0ff;
+  }
+
+  .about{
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:24px;
+  }
+  .about-card,.contact-card,.team-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:24px;
+    padding:28px;
+    box-shadow:var(--shadow);
+  }
+  .about-card ul{
+    margin:16px 0 0;
+    padding-left:18px;
+  }
+  .about-card li{margin-bottom:8px}
+  .side-visual{
+    position:relative;
+    min-height:100%;
+    border-radius:24px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  .side-visual img{
+    width:100%;
+    height:100%;
+    min-height:380px;
+    object-fit:cover;
+  }
+  .side-visual .overlay{
+    position:absolute;
+    inset:auto 18px 18px 18px;
+    background:rgba(10,31,82,.72);
+    color:#fff;
+    border-radius:18px;
+    padding:18px;
+    backdrop-filter:blur(8px);
+  }
+
+  .contact-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:22px;
+    margin-top:24px;
+  }
+  .contact-card strong{
+    display:block;
+    color:var(--blue-dark);
+    margin-bottom:8px;
+    font-size:18px;
+  }
+  .contact-card p{
+    margin:0;
+    color:var(--muted);
+  }
+
+  .bottom-cta{
+    background:
+      linear-gradient(115deg, rgba(10,31,82,.95), rgba(15,79,216,.90)),
+      url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+    color:#fff;
+    border-radius:28px;
+    padding:42px;
+    box-shadow:var(--shadow);
+  }
+  .bottom-cta h2{
+    margin:0 0 10px;
+    font-size:38px;
+  }
+  .bottom-cta p{
+    margin:0 0 18px;
+    max-width:700px;
+    color:rgba(255,255,255,.92);
+  }
+
+  footer{
+    padding:32px 0 42px;
+    border-top:1px solid #edf2ff;
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.2fr .9fr .9fr .9fr;
+    gap:22px;
+  }
+  footer h4{
+    margin:0 0 10px;
+    color:var(--blue-dark);
+    font-size:18px;
+  }
+  footer p, footer li{
+    color:var(--muted);
+    margin:0 0 7px;
+  }
+  footer ul{margin:0;padding-left:18px}
+
+  @media (max-width: 1020px){
+    .hero-grid,.partner,.services-grid,.about,.contact-grid,.footer-grid,.quick-grid{
+      grid-template-columns:1fr;
+    }
+    h1{font-size:44px}
+    .section-head{display:block}
+    .quick-features{margin-top:0;padding-top:18px}
+  }
+
+  @media (max-width: 720px){
+    .menu{display:none}
+    .hero-grid{min-height:auto;padding:54px 0}
+    .section-head h2{font-size:32px}
+    .service-body h3,.partner-card h3,.bottom-cta h2{font-size:28px}
+    .bottom-cta,.partner-card,.about-card,.contact-card,.team-card,.hero-card{padding:22px}
+  }
+</style>
 </head>
 <body>
-  <div class="page">
-    <header>
-      <div class="container nav">
-        <div class="logo">
-          <div class="logo-mark" aria-hidden="true">G</div>
-          <div>
-            <div>Garage Werkstatt</div>
-            <small style="font-size:0.7rem; font-weight:500; color:var(--muted); text-transform:none;">
-              Service • Reparatur • Reifen
-            </small>
-          </div>
-        </div>
 
-        <nav class="nav-links" aria-label="Hauptnavigation">
-          <a href="#kompetenz">Über uns</a>
-          <a href="#services">Leistungen</a>
-          <a href="#sorglos">Sorglos-Pakete</a>
-          <a href="#kontakt">Kontakt</a>
-        </nav>
-
-        <div class="nav-cta">
-          <a href="tel:+41000000000" class="btn btn-outline btn-small">
-            ☎︎ &nbsp;Jetzt anrufen
-          </a>
-          <a href="#kontakt" class="btn btn-primary btn-small">
-            Termin vereinbaren
-          </a>
-        </div>
-
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Navigation öffnen">
-          <span></span> Menü
-        </button>
-      </div>
-
-      <div class="nav-mobile" id="nav-mobile" hidden>
-        <a href="#kompetenz">Über uns</a>
-        <a href="#services">Leistungen</a>
-        <a href="#sorglos">Sorglos-Pakete</a>
-        <a href="#kontakt">Kontakt</a>
-        <div class="nav-mobile-cta">
-          <a href="tel:+41000000000" class="btn btn-outline btn-small">Anrufen</a>
-          <a href="#kontakt" class="btn btn-primary btn-small">Termin</a>
-        </div>
-      </div>
-    </header>
-
-    <main>
-      <!-- HERO -->
-      <section class="hero">
-        <div class="container hero-grid">
-          <div>
-            <div class="hero-kicker">
-              <div class="hero-kicker-badge">✓</div>
-              Ihre unabhängige Garage in Ihrer Nähe
-            </div>
-            <h1 class="hero-title">
-              Ihr Auto. <span>Unsere Werkstatt.</span>
-            </h1>
-            <p class="hero-subtitle">
-              Service, Reparatur und Reifenarbeiten für alle Marken – mit moderner Diagnose,
-              fairen Preisen und persönlicher Beratung.
-            </p>
-
-            <div class="hero-actions">
-              <a href="#kontakt" class="btn btn-primary">
-                Termin online anfragen
-                <span aria-hidden="true">→</span>
-              </a>
-              <a href="tel:+41000000000" class="btn btn-outline">
-                Sofort anrufen
-              </a>
-            </div>
-
-            <div class="hero-meta">
-              <span>★ ★ ★ ★ ★ &nbsp;Stammkunden seit Jahren</span>
-              <span>Heute geöffnet bis 18:00 Uhr</span>
-            </div>
-          </div>
-
-          <aside class="hero-card" aria-label="Werkstatt auf einen Blick">
-            <div class="hero-card-glow" aria-hidden="true"></div>
-
-            <div class="hero-card-badge">
-              🚗 &nbsp;Heute noch Plätze frei
-            </div>
-
-            <div class="hero-card-main">
-              <strong>Inspektion &amp; Service nach Herstellervorgaben</strong>
-              Wir kümmern uns darum, dass Ihr Fahrzeug zuverlässig bleibt – inklusive
-              digitalem Serviceeintrag, falls verfügbar.
-            </div>
-
-            <div class="hero-card-grid">
-              <div class="hero-card-item">
-                <span>24h</span>
-                Pannenhilfe im Umkreis auf Anfrage
-              </div>
-              <div class="hero-card-item">
-                <span>4x</span>
-                Reifenwechsel-Slots pro Stunde
-              </div>
-              <div class="hero-card-item">
-                <span>10+</span>
-                Jahre Erfahrung im Werkstattbetrieb
-              </div>
-              <div class="hero-card-item">
-                <span>Alle</span>
-                Marken &amp; Antriebsarten willkommen
-              </div>
-            </div>
-
-            <div class="hero-card-tag">
-              ✅ &nbsp;Ersatzwagen / Hol- &amp; Bringservice
-            </div>
-          </aside>
-        </div>
-      </section>
-
-      <!-- KOMPETENZ / VERSPRECHEN / SERVICE -->
-      <section id="kompetenz">
-        <div class="container">
-          <div class="section-header">
-            <div class="section-kicker">Wer wir sind</div>
-            <h2 class="section-title">Ihre Spezialisten für Service &amp; Reparatur aller Marken</h2>
-            <p class="section-subtitle">
-              Von der Jahresinspektion bis zur Fehlersuche an modernen Fahrzeugen – wir verbinden
-              Erfahrung mit aktueller Diagnosetechnik.
-            </p>
-          </div>
-
-          <div class="pill-grid">
-            <article class="pill-card">
-              <div class="pill-inner">
-                <div class="pill-icon" aria-hidden="true">🔧</div>
-                <div class="pill-label">Unsere Kompetenz</div>
-                <h3 class="pill-title">Moderne Werkstatt mit erfahrenem Team</h3>
-                <p class="pill-text">
-                  Regelmässige Schulungen, aktuelle Diagnosegeräte und transparente Beratung –
-                  damit Sie genau wissen, was an Ihrem Auto gemacht wird.
-                </p>
-                <div class="pill-link">
-                  Serviceübersicht ansehen <span>→</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="pill-card">
-              <div class="pill-inner">
-                <div class="pill-icon" aria-hidden="true">🤝</div>
-                <div class="pill-label">Unser Versprechen</div>
-                <h3 class="pill-title">Faire Preise &amp; klare Kommunikation</h3>
-                <p class="pill-text">
-                  Sie erhalten auf Wunsch einen Kostenvoranschlag vor Beginn der Arbeiten und
-                  wir melden uns, bevor weitere Positionen anfallen.
-                </p>
-                <div class="pill-link">
-                  Termin online anfragen <span>→</span>
-                </div>
-              </div>
-            </article>
-
-            <article class="pill-card">
-              <div class="pill-inner">
-                <div class="pill-icon" aria-hidden="true">🛡️</div>
-                <div class="pill-label">Unser Service</div>
-                <h3 class="pill-title">Qualität, auf die Sie sich verlassen können</h3>
-                <p class="pill-text">
-                  Wir verwenden je nach Wunsch Originalteile oder qualitativ gleichwertige
-                  Marken-Ersatzteile – inklusive Garantie.
-                </p>
-                <div class="pill-link">
-                  Jetzt Kontakt aufnehmen <span>→</span>
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- SERVICES -->
-      <section class="services" id="services">
-        <div class="container services-inner">
-          <div class="section-header">
-            <div class="section-kicker">Dienstleistungen</div>
-            <h2 class="section-title">Unsere Top-Leistungen in der Werkstatt</h2>
-            <p class="section-subtitle">
-              Ob Routine-Service oder dringende Reparatur: Wir planen Ihren Termin so, dass Ihr
-              Fahrzeug schnell wieder einsatzbereit ist.
-            </p>
-          </div>
-
-          <div class="services-grid">
-            <article class="service-card">
-              <div class="service-title">Räder- &amp; Reifenservice</div>
-              <div class="service-meta">Sommer- &amp; Winterreifen, Montage &amp; Einlagerung</div>
-              <ul class="service-list">
-                <li><span class="service-bullet"></span>Reifenwechsel inkl. Profiltiefen-Check</li>
-                <li><span class="service-bullet"></span>Auswuchten der Räder</li>
-                <li><span class="service-bullet"></span>Prüfung Ventile und Reifendruck</li>
-                <li><span class="service-bullet"></span>Optional: Reifeneinlagerung</li>
-              </ul>
-              <div class="service-highlight">
-                <span class="service-tag-dot"></span> Saison-Termine verfügbar
-              </div>
-            </article>
-
-            <article class="service-card light">
-              <div class="service-title">Inspektion &amp; Service</div>
-              <div class="service-meta">Nach Herstellervorgaben für alle Marken</div>
-              <ul class="service-list">
-                <li><span class="service-bullet"></span>Wartung gemäss Serviceplan</li>
-                <li><span class="service-bullet"></span>Check von Bremsen, Fahrwerk &amp; Beleuchtung</li>
-                <li><span class="service-bullet"></span>Kontrolle aller Flüssigkeiten &amp; Filter</li>
-                <li><span class="service-bullet"></span>Serviceeintrag im digitalen Serviceheft (falls möglich)</li>
-              </ul>
-              <div class="service-highlight">
-                <span class="service-tag-dot"></span> Herstellergarantie bleibt erhalten
-              </div>
-            </article>
-
-            <article class="service-card">
-              <div class="service-title">Ölwechsel &amp; Motorpflege</div>
-              <div class="service-meta">Passendes Markenmotoröl für Ihr Fahrzeug</div>
-              <ul class="service-list">
-                <li><span class="service-bullet"></span>Ablassen &amp; umweltgerechtes Entsorgen des Altöls</li>
-                <li><span class="service-bullet"></span>Neuer Ölfilter / Dichtring</li>
-                <li><span class="service-bullet"></span>Prüfung auf Ölverlust</li>
-                <li><span class="service-bullet"></span>Sichtkontrolle rund um den Motorraum</li>
-              </ul>
-              <div class="service-highlight">
-                <span class="service-tag-dot"></span> Motorschutz &amp; Langlebigkeit
-              </div>
-            </article>
-
-            <article class="service-card light">
-              <div class="service-title">Batterie &amp; Elektrik</div>
-              <div class="service-meta">Sichere Starts – auch im Winter</div>
-              <ul class="service-list">
-                <li><span class="service-bullet"></span>Batterietest mit Diagnosegerät</li>
-                <li><span class="service-bullet"></span>Reinigung von Polen &amp; Kontakten</li>
-                <li><span class="service-bullet"></span>Austausch mit passender Qualitätsbatterie</li>
-                <li><span class="service-bullet"></span>Prüfung der Lichtmaschine (Ladespannung)</li>
-              </ul>
-              <div class="service-highlight">
-                <span class="service-tag-dot"></span> Kein Ärger beim Start
-              </div>
-            </article>
-
-            <article class="service-card">
-              <div class="service-title">Bremsen &amp; Sicherheit</div>
-              <div class="service-meta">Damit Sie rechtzeitig zum Stehen kommen</div>
-              <ul class="service-list">
-                <li><span class="service-bullet"></span>Prüfung von Belägen, Scheiben &amp; Trommeln</li>
-                <li><span class="service-bullet"></span>Kontrolle Bremsflüssigkeit</li>
-                <li><span class="service-bullet"></span>Inspektion Bremsleitungen und -schläuche</li>
-                <li><span class="service-bullet"></span>Entlüftung der Bremsanlage</li>
-              </ul>
-              <div class="service-highlight">
-                <span class="service-tag-dot"></span> Kurze Bremswege – mehr Sicherheit
-              </div>
-            </article>
-
-            <article class="service-card light">
-              <div class="service-title">Glas &amp; Beleuchtung</div>
-              <div class="service-meta">Klare Sicht bei Tag &amp; Nacht</div>
-              <ul class="service-list">
-                <li><span class="service-bullet"></span>Steinschlagreparatur an der Frontscheibe</li>
-                <li><span class="service-bullet"></span>Austausch bei grösseren Schäden</li>
-                <li><span class="service-bullet"></span>Prüfung aller Leuchtmittel</li>
-                <li><span class="service-bullet"></span>Einstellung der Scheinwerfer</li>
-              </ul>
-              <div class="service-highlight">
-                <span class="service-tag-dot"></span> Sicherheit &amp; Sichtbarkeit
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- SORGLOS-LEISTUNGEN -->
-      <section id="sorglos">
-        <div class="container">
-          <div class="section-header">
-            <div class="section-kicker">Sorglos unterwegs</div>
-            <h2 class="section-title">Mehr als nur Werkstatt – unsere Zusatzleistungen</h2>
-            <p class="section-subtitle">
-              Auf Wunsch kombinieren wir Service, Mobilität und Transparenz zu praktischen Paketen,
-              damit Sie sich um möglichst wenig kümmern müssen.
-            </p>
-          </div>
-
-          <div class="sorglos-grid">
-            <div class="sorglos-main">
-              <div class="badge-inline">
-                🚘 Kostenlose Mobilitätslösung bei vielen Services
-              </div>
-              <h3>Service inkl. Ersatzwagen oder Hol- &amp; Bringservice</h3>
-              <p>
-                Sie sollen mobil bleiben, auch wenn Ihr Fahrzeug bei uns ist. Darum bieten wir je nach
-                Paket einen Ersatzwagen oder einen Hol- &amp; Bringservice in der Region an.
-              </p>
-              <ul class="sorglos-list">
-                <li>
-                  <span class="sorglos-check">✔</span>
-                  <span>Service-Termine mit optionalem Ersatzwagen nach Verfügbarkeit</span>
-                </li>
-                <li>
-                  <span class="sorglos-check">✔</span>
-                  <span>Hol- &amp; Bringservice im Umkreis nach Absprache</span>
-                </li>
-                <li>
-                  <span class="sorglos-check">✔</span>
-                  <span>Auf Wunsch Abgabe ausserhalb der Öffnungszeiten möglich</span>
-                </li>
-                <li>
-                  <span class="sorglos-check">✔</span>
-                  <span>Transparente Abrechnung und Erklärung der Rechnung</span>
-                </li>
-              </ul>
-            </div>
-
-            <div class="sorglos-side">
-              <div class="sorglos-box">
-                <h4>Reifenpaket mit Garantie</h4>
-                <p class="sorglos-meta">
-                  Beim Kauf neuer Reifen in der Garage können Sie optional ein
-                  Reifenschutz-Paket dazubuchen – Schutz bei z.B. Nagelschäden oder Randsteinkontakt.
-                </p>
-              </div>
-
-              <div class="sorglos-box light">
-                <h4>Erinnerung an Service &amp; MFK</h4>
-                <p class="sorglos-meta">
-                  Auf Wunsch erinnern wir Sie rechtzeitig an den nächsten Service oder an den Termin
-                  für die Motorfahrzeugkontrolle (MFK).
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ÜBER UNS & KONTAKT -->
-      <section id="kontakt">
-        <div class="container">
-          <div class="section-header">
-            <div class="section-kicker">Kontakt &amp; Anfahrt</div>
-            <h2 class="section-title">So erreichen Sie unsere Garage</h2>
-            <p class="section-subtitle">
-              Rufen Sie uns an, schreiben Sie uns eine Nachricht oder kommen Sie direkt vorbei – wir beraten Sie gerne.
-            </p>
-          </div>
-
-          <div class="about-grid">
-            <article class="about-card">
-              <h3>Ihre Garage / Werkstatt</h3>
-              <p>
-                Hier können Sie einen kurzen Text über Ihre Garage einfügen: Geschichte, Spezialisierungen
-                (z.&nbsp;B. bestimmte Marken) und was Sie von anderen Werkstätten unterscheidet.
-              </p>
-              <p>
-                <strong>Adresse:</strong><br />
-                Musterstrasse 1<br />
-                0000 Musterort
-              </p>
-              <p>
-                <strong>E-Mail:</strong>
-                <a href="mailto:info@garage-beispiel.ch">info@garage-beispiel.ch</a>
-                <br />
-                <strong>Telefon:</strong>
-                <a href="tel:+41000000000">+41 00 000 00 00</a>
-              </p>
-              <div class="about-stats">
-                <div class="about-stat">✓ Unabhängige Marken-Garage</div>
-                <div class="about-stat">✓ Original- &amp; Marken-Ersatzteile</div>
-                <div class="about-stat">✓ Transparente Offerten</div>
-              </div>
-            </article>
-
-            <div class="about-contact">
-              <div class="about-contact-box">
-                <h4>Termin anfragen</h4>
-                <p>
-                  Schreiben Sie uns kurz Ihr Anliegen (Service, Reparatur, Reifen usw.). Wir melden uns
-                  schnellstmöglich mit einem Terminvorschlag.
-                </p>
-                <form
-                  action="mailto:info@garage-beispiel.ch"
-                  method="post"
-                  enctype="text/plain"
-                  style="margin-top:0.8rem; display:grid; gap:0.55rem;"
-                >
-                  <input
-                    type="text"
-                    name="Name"
-                    placeholder="Ihr Name"
-                    required
-                    style="border-radius:999px; border:none; padding:0.55rem 0.9rem; font-size:0.85rem;"
-                  />
-                  <input
-                    type="tel"
-                    name="Telefon"
-                    placeholder="Telefon (für Rückruf)"
-                    style="border-radius:999px; border:none; padding:0.55rem 0.9rem; font-size:0.85rem;"
-                  />
-                  <textarea
-                    name="Anliegen"
-                    rows="3"
-                    placeholder="Kurzbeschreibung von Fahrzeug &amp; Anliegen"
-                    style="border-radius:14px; border:none; padding:0.6rem 0.9rem; font-size:0.85rem; resize:vertical;"
-                  ></textarea>
-                  <button type="submit" class="btn btn-primary btn-small">
-                    Anfrage senden
-                  </button>
-                </form>
-                <div class="contact-actions">
-                  <a href="tel:+41000000000" class="btn btn-outline btn-small">Telefon</a>
-                  <a href="https://maps.google.com?q=Musterstrasse+1+0000+Musterort" class="btn btn-outline btn-small">
-                    Route planen
-                  </a>
-                </div>
-              </div>
-
-              <div class="opening-hours">
-                <h4>Öffnungszeiten</h4>
-                <div class="opening-row">
-                  <span>Mo – Fr</span>
-                  <span>07:30 – 12:00 / 13:30 – 18:00</span>
-                </div>
-                <div class="opening-row">
-                  <span>Sa</span>
-                  <span>Nach Vereinbarung</span>
-                </div>
-                <div class="opening-row">
-                  <span>So</span>
-                  <span>Geschlossen</span>
-                </div>
-                <div class="opening-note">
-                  Bitte vereinbaren Sie nach Möglichkeit vorab einen Termin – so können wir ausreichend Zeit
-                  für Sie einplanen.
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- FOOTER -->
-    <footer>
-      <div class="container footer-inner">
-        <div>© <span id="year"></span> Ihre Garage / Werkstatt – Alle Rechte vorbehalten</div>
-        <div class="footer-links">
-          <a href="#">Impressum</a>
-          <a href="#">Datenschutz</a>
-          <a href="#kontakt">Kontakt</a>
-        </div>
-      </div>
-    </footer>
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <div class="brand">I&A Automobile GmbH</div>
+    <div class="menu">
+      <a href="#start">Startseite</a>
+      <a href="#leistungen">Dienstleistungen</a>
+      <a href="#ueber-uns">Über uns</a>
+      <a href="#standort">Standort</a>
+      <a href="#kontakt">Kontakt</a>
+    </div>
   </div>
+</nav>
 
-  <script>
-    // Mobile Navigation Toggle
-    const navToggle = document.querySelector(".nav-toggle");
-    const navMobile = document.getElementById("nav-mobile");
+<header class="hero" id="start">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="badge">Ihr zuverlässiger Partner für Fahrzeuge &amp; Service</span>
+      <h1>Fahrzeuge, Service &amp; Aufbereitung aus einer Hand</h1>
+      <p class="lead">
+        Langjährige Erfahrung in der Autowelt, persönliche Beratung und zuverlässige Lösungen rund ums Fahrzeug.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="tel:+41788640626">Jetzt anrufen</a>
+        <a class="btn btn-secondary" href="https://wa.me/41788640626">WhatsApp anfragen</a>
+      </div>
+    </div>
 
-    if (navToggle && navMobile) {
-      navToggle.addEventListener("click", () => {
-        const expanded = navToggle.getAttribute("aria-expanded") === "true";
-        navToggle.setAttribute("aria-expanded", String(!expanded));
-        navMobile.hidden = expanded;
-      });
+    <div class="hero-card">
+      <img src="bilder/aussen1.png" alt="Fahrzeug von I&A Automobile">
+      <h3>I&amp;A Automobile GmbH</h3>
+      <p>Römerstrasse 22a, 4314 Zeiningen, Schweiz</p>
+      <p>Mo – Fr: 08:00 – 18:00<br>Sa: 09:00 – 14:00</p>
+      <p>+41 78 864 06 26 · +41 76 456 34 42<br>info@ia-automobile.ch</p>
+    </div>
+  </div>
+</header>
 
-      // Close mobile nav when clicking a link
-      navMobile.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-          navToggle.setAttribute("aria-expanded", "false");
-          navMobile.hidden = true;
-        });
-      });
-    }
+<div class="quick-features">
+  <div class="wrap quick-grid">
+    <div class="quick-item">
+      <div class="icon">✓</div>
+      <strong>Langjährige Erfahrung</strong>
+      <span>Fundiertes Fachwissen in der Automobilbranche.</span>
+    </div>
+    <div class="quick-item">
+      <div class="icon">🚘</div>
+      <strong>Zuverlässigkeit</strong>
+      <span>Geprüfte Fahrzeuge und transparente Beratung.</span>
+    </div>
+    <div class="quick-item">
+      <div class="icon">🤝</div>
+      <strong>Persönlicher Service</strong>
+      <span>Individuelle Betreuung für jeden Kunden.</span>
+    </div>
+    <div class="quick-item">
+      <div class="icon">🇨🇭</div>
+      <strong>Schweizer Qualität</strong>
+      <span>Höchste Standards bei Service und Verkauf.</span>
+    </div>
+  </div>
+</div>
 
-    // Jahr im Footer automatisch setzen
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+<section id="partner">
+  <div class="wrap"  style="background-color:rgba(79, 96, 252, 0.466); padding:15px; border-radius:15px;">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Unser Partner</div>
+        <h2>carora.ch – Autopflege &amp; Reinigungsprodukte</h2>
+        <p>Premium Produkte für die professionelle Fahrzeugpflege.</p>
+      </div>
+    </div>
+
+    <div class="partner">
+      <div class="partner-image">
+        <img src="bilder/car.png" alt="Autopflegeprodukte">
+      </div>
+      <div class="partner-card">
+        <h3>Top Qualität für dein Fahrzeug</h3>
+        <p>
+          Hochwertige Produkte für professionelle Reinigung, Pflege und Aufbereitung.
+          Ideal für alle, die ihrem Fahrzeug einen gepflegten und hochwertigen Auftritt geben möchten.
+        </p>
+        <a class="btn btn-blue" href="#">Zum Shop</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="leistungen">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Unsere Dienstleistungen</div>
+        <h2>Kompetent, zuverlässig und fair</h2>
+        <p>Umfassende Lösungen rund ums Fahrzeug – von Verkauf über Ankauf bis Service und Aufbereitung.</p>
+      </div>
+    </div>
+
+    <div class="services-grid">
+      <article class="service-card">
+        <div class="service-image">
+          <img src="bilder/aussen2.png" alt="Autoverkauf">
+        </div>
+        <div class="service-body">
+          <h3>Autoverkauf</h3>
+          <p>Professioneller Verkauf geprüfter Fahrzeuge mit persönlicher Beratung.</p>
+          <ul class="service-list">
+            <li>Geprüfte Qualitätsfahrzeuge</li>
+            <li>Transparente Fahrzeughistorie</li>
+            <li>Persönliche Beratung und Probefahrt</li>
+            <li>Finanzierungsmöglichkeiten</li>
+          </ul>
+          <div class="service-actions">
+            <a class="btn btn-blue" href="https://www.autoscout24.ch/de/s/seller-2588950">Unsere Fahrzeuge</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="service-card">
+        <div class="service-image">
+          <img src="bilder/motor.png" alt="Service und MFK">
+        </div>
+        <div class="service-body">
+          <h3>Service &amp; MFK-Bereitstellung</h3>
+          <p>Vorbereitung, Kontrolle und Service für die Motorfahrzeugkontrolle.</p>
+          <ul class="service-list">
+            <li>Umfassende Fahrzeugprüfung</li>
+            <li>MFK-Vorbereitung und Begleitung</li>
+            <li>Reparatur und Instandhaltung</li>
+            <li>Öl- und Filterwechsel</li>
+          </ul>
+          <div class="service-actions">
+            <a class="btn btn-blue" href="tel:+41788640626">Jetzt anrufen</a>
+            <a class="btn btn-light" href="https://wa.me/41788640626">WhatsApp</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="service-card">
+        <div class="service-image">
+          <img src="bilder/felgen.png" alt="Reifen und Räder">
+        </div>
+        <div class="service-body">
+          <h3>Reifen &amp; Räder</h3>
+          <p>Reifenwechsel, Montage, Beratung und saisonale Lösungen.</p>
+          <ul class="service-list">
+            <li>Saisonaler Reifenwechsel</li>
+            <li>Professionelle Montage</li>
+            <li>Beratung zur Reifenwahl</li>
+            <li>Einlagerung Ihrer Reifen</li>
+          </ul>
+          <div class="service-actions">
+            <a class="btn btn-blue" href="tel:+41788640626">Jetzt anrufen</a>
+            <a class="btn btn-light" href="https://wa.me/41788640626">WhatsApp</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="service-card">
+        <div class="service-image">
+          <img src="bilder/innen.png" alt="Fahrzeugaufbereitung">
+        </div>
+        <div class="service-body">
+          <h3>Fahrzeugaufbereitung</h3>
+          <p>Professionelle Reinigung und Pflege für ein sauberes und gepflegtes Fahrzeug.</p>
+          <ul class="service-list">
+            <li>Gründliche Innenreinigung</li>
+            <li>Professionelle Aussenreinigung</li>
+            <li>Polier- und Versiegelungsarbeiten</li>
+            <li>Geruchsneutralisation</li>
+          </ul>
+          <div class="service-actions">
+            <a class="btn btn-blue" href="tel:+41788640626">Jetzt anrufen</a>
+            <a class="btn btn-light" href="https://wa.me/41788640626">WhatsApp</a>
+          </div>
+        </div>
+      </article>
+
+
+    </div>
+  </div>
+</section>
+
+<section id="ueber-uns">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Warum I&amp;A Automobile?</div>
+        <h2>Vertrauen, Qualität und langjährige Erfahrung</h2>
+        <p>I&amp;A Automobile GmbH steht für hochwertige Fahrzeuge und zuverlässige Werkstattdienstleistungen.</p>
+      </div>
+    </div>
+
+    <div class="about">
+      <div class="about-card">
+        <p>
+          Unser Ziel ist es, unseren Kunden hochwertige Fahrzeuge sowie zuverlässige Werkstattdienstleistungen anzubieten.
+          Wir sind stets bemüht, individuelle Lösungen zu schaffen.
+        </p>
+        <ul>
+          <li>Langjährige Erfahrung in der Automobilbranche</li>
+          <li>Persönliche und kompetente Beratung</li>
+          <li>Faire und transparente Konditionen</li>
+          <li>Zuverlässiger Service und schnelle Abwicklung</li>
+        </ul>
+
+        <div class="hero-actions">
+          <a class="btn btn-blue" href="tel:+41788640626">Jetzt anrufen</a>
+          <a class="btn btn-light" href="https://wa.me/41788640626">WhatsApp anfragen</a>
+        </div>
+      </div>
+
+      <div class="side-visual">
+        <img src="bilder/lift.png" alt="Werkstatt und Fahrzeug">
+        <div class="overlay">
+          <strong>Werkstatt &amp; Service</strong>
+          <div>Persönlich. Transparent. Zuverlässig.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="standort">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Unser Standort</div>
+        <h2>Besuchen Sie uns in Zeiningen</h2>
+        <p>Wir freuen uns auf Ihre Anfrage und beraten Sie gerne persönlich.</p>
+      </div>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <strong>Adresse</strong>
+        <p>Römerstrasse 22a<br>4314 Zeiningen, Schweiz</p>
+      </div>
+      <div class="contact-card">
+        <strong>Telefon</strong>
+        <p>+41 78 864 06 26<br>+41 76 456 34 42</p>
+      </div>
+      <div class="contact-card">
+        <strong>E-Mail</strong>
+        <p>info@ia-automobile.ch</p>
+      </div>
+      <div class="contact-card">
+        <strong>Öffnungszeiten</strong>
+        <p>Mo – Fr: 08:00 – 18:00<br>Sa: 09:00 – 14:00<br>So: Geschlossen</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kontakt">
+  <div class="wrap">
+    <div class="bottom-cta">
+      <h2>Interesse an einem Fahrzeug?</h2>
+      <p>Kontaktieren Sie uns für eine persönliche Beratung. Wir sind gerne für Sie da.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="tel:+41788640626">Jetzt anrufen</a>
+        <a class="btn btn-secondary" href="https://wa.me/41788640626">WhatsApp anfragen</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-grid">
+    <div>
+      <h4>I&amp;A Automobile</h4>
+      <p>Ihr zuverlässiger Partner für Fahrzeuge und professionellen Service in Zeiningen.</p>
+      <p>UID: CHE-337.007.831</p>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <ul>
+        <li>Startseite</li>
+        <li>Dienstleistungen</li>
+        <li>Über uns</li>
+        <li>Standort</li>
+        <li>Kontakt</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Kontakt</h4>
+      <p>Römerstrasse 22a</p>
+      <p>4314 Zeiningen, Schweiz</p>
+      <p>+41 78 864 06 26</p>
+      <p>+41 76 456 34 42</p>
+      <p>info@ia-automobile.ch</p>
+    </div>
+    <div>
+      <h4>Geschäftsleitung</h4>
+      <p><strong>Ilaz Ferizi</strong><br>Vorsitzender der Geschäftsführung</p>
+      <p><strong>Arbin Kurtaj</strong><br>Geschäftsführer</p>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>
